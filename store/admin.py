@@ -3,12 +3,12 @@ from django.contrib import admin
 from store.models import *
 
 # Register your models here.
-admin.register(Category)
-admin.register(Tree)
-admin.register(Product)
-admin.register(Wishlist)
-admin.register(WishlistTreeItem)
-admin.register(WishlistProductItem)
-admin.register(Cart)
-admin.register(CartProductItem)
-admin.register(CartTreeItem)
+admin.site.register(Category)
+admin.site.register(Tree)
+admin.site.register(Product)
+admin.site.register(Wishlist)
+admin.site.register(WishlistTreeItem)
+admin.site.register(WishlistProductItem)
+admin.site.register(Cart)
+admin.site.register(CartProductItem)
+admin.site.register(CartTreeItem)
