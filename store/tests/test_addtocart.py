@@ -1,13 +1,15 @@
 from django.contrib.auth.models import User
 from django.test import TestCase, Client
 
-from store.models import Tree, Category, Cart, Product, CartTreeItem, CartProductItem
+from store.models import Tree, Category, Cart, Product, CartTreeItem, \
+    CartProductItem
 
 
 class CartTest(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create_user(username='bobbytables', password='fakepassword')
+        self.user = User.objects.create_user(username='bobbytables',
+                                             password='fakepassword')
         self.client = Client()
         self.client.login(username='bobbytables', password='fakepassword')
 
@@ -55,10 +57,13 @@ class CartTest(TestCase):
         self.client.get('/addtreetocart/1/1/', follow=True)
 
         cart = Cart.objects.get(user=self.user)
-        tree_item = cart.trees.first()  # get the first tree item in cart which should be a SomeTree w/ id 1
+        # get the first tree item in cart which should be a SomeTree w/ id 1
+        tree_item = cart.trees.first()
 
-        self.assertEqual(tree_item.id, 1, msg="first item in trees cart doesn't have id=1")
-        self.assertEqual(tree_item.qty, 1, msg="first item in trees cart doesn't have qty=1")
+        self.assertEqual(tree_item.id, 1,
+                         msg="first item in trees cart doesn't have id=1")
+        self.assertEqual(tree_item.qty, 1,
+                         msg="first item in trees cart doesn't have qty=1")
 
     def test_add_product(self):
         self.client.get('/addproducttocart/1/1/', follow=True)
@@ -66,8 +71,10 @@ class CartTest(TestCase):
         cart = Cart.objects.get(user=self.user)
         product_item = cart.products.first()
 
-        self.assertEqual(product_item.id, 1, msg="first item in products cart doesn't have id=1")
-        self.assertEqual(product_item.qty, 1, msg="first item in products cart doesn't have qty=1")
+        self.assertEqual(product_item.id, 1,
+                         msg="first item in products cart doesn't have id=1")
+        self.assertEqual(product_item.qty, 1,
+                         msg="first item in products cart doesn't have qty=1")
 
     def test_multi_add_tree(self):
         # ensure all CartTreeItems are deleted before running
@@ -80,8 +87,10 @@ class CartTest(TestCase):
         cart = Cart.objects.get(user=self.user)
         tree_item = cart.trees.first()
 
-        self.assertEqual(tree_item.id, 1, msg="first item in product cart doesn't have id=1")
-        self.assertEqual(tree_item.qty, 4, msg="after repeat adds qty not qty=4")
+        self.assertEqual(tree_item.id, 1,
+                         msg="first item in product cart doesn't have id=1")
+        self.assertEqual(tree_item.qty, 4,
+                         msg="after repeat adds qty not qty=4")
 
     def test_multi_add_product(self):
         # ensure all CartProductItems are deleted
@@ -94,5 +103,7 @@ class CartTest(TestCase):
         cart = Cart.objects.get(user=self.user)
         product_item = cart.products.first()
 
-        self.assertEqual(product_item.id, 1, msg="first item in products cart doesn't have id=1")
-        self.assertEqual(product_item.qty, 4, msg="after repeat adds qty not qty=4")
+        self.assertEqual(product_item.id, 1,
+                         msg="first item in products cart doesn't have id=1")
+        self.assertEqual(product_item.qty, 4,
+                         msg="after repeat adds qty not qty=4")

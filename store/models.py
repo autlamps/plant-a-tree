@@ -67,7 +67,8 @@ class Wishlist(models.Model):
 
 
 class WishlistTreeItem(models.Model):
-    wishlist = models.ForeignKey('Wishlist', on_delete=models.CASCADE, related_name='trees')
+    wishlist = models.ForeignKey('Wishlist', on_delete=models.CASCADE,
+                                 related_name='trees')
     tree = models.ForeignKey('Tree', on_delete=models.CASCADE)
     qty = models.IntegerField()
 
@@ -76,7 +77,8 @@ class WishlistTreeItem(models.Model):
 
 
 class WishlistProductItem(models.Model):
-    wishlist = models.ForeignKey('Wishlist', on_delete=models.CASCADE, related_name='products')
+    wishlist = models.ForeignKey('Wishlist', on_delete=models.CASCADE,
+                                 related_name='products')
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     qty = models.IntegerField()
 
@@ -93,7 +95,8 @@ class Cart(models.Model):
 
 
 class CartTreeItem(models.Model):
-    cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='trees')
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE,
+                             related_name='trees')
     tree = models.ForeignKey('Tree', on_delete=models.CASCADE)
     qty = models.IntegerField()
 
@@ -102,9 +105,10 @@ class CartTreeItem(models.Model):
 
 
 class CartProductItem(models.Model):
-    cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='products')
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE,
+                             related_name='products')
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     qty = models.IntegerField()
 
     def __str__(self):
-        return self.cart.user.username + " " + self.product.name\
+        return self.cart.user.username + " " + self.product.name

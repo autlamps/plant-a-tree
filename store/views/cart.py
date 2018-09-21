@@ -55,7 +55,8 @@ def add(request, type_of, item_id, qty):
     elif type_of == TYPE_PRODUCT:
         item = get_object_or_404(Product, pk=item_id)
 
-        cart_item = CartProductItem.objects.filter(product=item, cart=cart).first()
+        cart_item = CartProductItem.objects.filter(product=item,
+                                                   cart=cart).first()
 
         if cart_item is None:
             cart_item = CartProductItem(
