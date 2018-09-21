@@ -55,15 +55,56 @@ class Product(models.Model):
     image = models.CharField(max_length=100000)
 
 
+# a little bit of copying is better than a little bit of abstraction
+# also... I'm lazy
+
 class Wishlist(models.Model):
     user = models.ForeignKey(django.contrib.auth.get_user_model(),
                              related_name='wishlist', on_delete=models.CASCADE)
-    trees = models.ForeignKey('Tree', on_delete=models.PROTECT)
-    products = models.ForeignKey('Product', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.user.username
+
+
+class WishlistTreeItem(models.Model):
+    wishlist = models.ForeignKey('Wishlist', on_delete=models.CASCADE, related_query_name='trees')
+    tree = models.ForeignKey('Tree', on_delete=models.CASCADE)
+    qty = models.IntegerField()
+
+    def __str__(self):
+        return self.wishlist.user.username + " " + self.tree.name
+
+
+class WishlistProductItem(models.Model):
+    wishlist = models.ForeignKey('Wishlist', on_delete=models.CASCADE, related_query_name='products')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    qty = models.IntegerField()
+
+    def __str__(self):
+        return self.wishlist.user.username + " " + self.product.name
 
 
 class Cart(models.Model):
     user = models.ForeignKey(django.contrib.auth.get_user_model(),
                              related_name='cart', on_delete=models.CASCADE)
-    trees = models.ForeignKey('Tree', on_delete=models.PROTECT)
-    products = models.ForeignKey('Product', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.user.username
+
+
+class CartTreeItem(models.Model):
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_query_name='trees')
+    tree = models.ForeignKey('Tree', on_delete=models.CASCADE)
+    qty = models.IntegerField()
+
+    def __str__(self):
+        return self.cart.user.username + " " + self.tree.name
+
+
+class CartProductItem(models.Model):
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_query_name='products')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    qty = models.IntegerField()
+
+    def __str__(self):
+        return self.cart.user.username + " " + self.product.name\
