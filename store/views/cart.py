@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.http import HttpResponseServerError, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_http_methods
 
 from store.models import CartTreeItem, Cart, Tree, Product, CartProductItem
@@ -80,12 +80,69 @@ def add(request, type_of, item_id, qty):
         return HttpResponseServerError()
 
 
+@login_required
+@require_http_methods(["GET"])
+def increase_tree_qty(request, item_id):
+    item = get_object_or_404(CartTreeItem, pk=item_id)
+    item.qty += 1
+    item.save()
+    return redirect('store:cart')
+
+
+@login_required
+@require_http_methods(["GET"])
+def decrease_tree_qty(request, item_id):
+    item = get_object_or_404(CartTreeItem, pk=item_id)
+    item.qty += -1
+    item.save()
+    return redirect('store:cart')
+
+
+@login_required
+@require_http_methods(["GET"])
+def remove_tree(request, item_id):
+    item = get_object_or_404(CartTreeItem, pk=item_id)
+    item.delete()
+    return redirect('store:cart')
+
+
+@login_required
+@require_http_methods(["GET"])
+def increase_product_qty(request, item_id):
+    item = get_object_or_404(CartProductItem, pk=item_id)
+    item.qty += 1
+    item.save()
+    return redirect('store:cart')
+
+
+@login_required
+@require_http_methods(["GET"])
+def decrease_product_qty(request, item_id):
+    item = get_object_or_404(CartProductItem, pk=item_id)
+    item.qty += -1
+    item.save()
+    return redirect('store:cart')
+
+
+@login_required
+@require_http_methods(["GET"])
+def remove_product(request, item_id):
+    item = get_object_or_404(CartProductItem, pk=item_id)
+    item.delete()
+    return redirect('store:cart')
+
+
+@login_required
+@require_http_methods(["GET"])
 def cart(request):
     try:
-        cart = Cart.objects.get(user=request.user)
+        cart_ob = Cart.objects.get(user=request.user)
     except Cart.DoesNotExist:
-        cart = Cart(user=request.user)
-        cart.save()
+        cart_ob = Cart(user=request.user)
+        cart_ob.save()
 
-
-    return HttpResponse('cart')
+    return render(request, 'cart.html', context={
+        'page_title': 'Cart',
+        'trees': cart_ob.trees.all(),
+        'products': cart_ob.products.all(),
+    })
