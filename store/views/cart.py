@@ -81,4 +81,11 @@ def add(request, type_of, item_id, qty):
 
 
 def cart(request):
+    try:
+        cart = Cart.objects.get(user=request.user)
+    except Cart.DoesNotExist:
+        cart = Cart(user=request.user)
+        cart.save()
+
+
     return HttpResponse('cart')

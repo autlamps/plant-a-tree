@@ -99,6 +99,7 @@ class CartTest(TestCase):
         self.client.get('/addproducttocart/1/1/', follow=True)
         self.client.get('/addproducttocart/1/1/', follow=True)
         self.client.get('/addproducttocart/1/2/', follow=True)
+        self.client.get('/addproducttocart/1/-1/', follow=True)
 
         cart = Cart.objects.get(user=self.user)
         product_item = cart.products.first()
