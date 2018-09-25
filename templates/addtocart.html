@@ -1,0 +1,24 @@
+{% extends 'base_store.html' %}
+
+{% block customcss %}
+<style>
+/* Show it's not fixed to the top */
+body {
+  min-height: 75rem;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+    <main role="main" class="container">
+      <div class="jumbotron">
+        <h1>Added {{ item_name }} to cart...</h1>
+          <img src="{{ image }}" alt="..." class="img-thumbnail">
+        <p class="lead">You have added {{ item_qty }} of {{ item_name }} to your cart.</p>
+        <a class="btn btn-lg btn-primary" href="{% url 'store:cart' %}" role="button">Continue to cart &raquo;</a>
+      </div>
+    </main>
+
+{% endblock %}

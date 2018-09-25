@@ -1,0 +1,61 @@
+{% extends 'base_store.html' %}
+
+{% block customcss %}
+<style>
+/* Show it's not fixed to the top */
+body {
+  min-height: 75rem;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+    <div class="row">
+        <h2>Cart</h2>
+    </div>
+
+    {% if trees or products %}
+         <table class="table table-striped">
+                <thead>
+                  <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Qty</th>
+                      <th scope="col">Increase Qty</th>
+                      <th scope="col">Decrease Qty</th>
+                      <th scope="col">Remove</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for tree in trees %}
+                  <tr>
+                    <th scope="row">{{ tree.tree.name }}</th>
+                    <td>{{ tree.qty }}</td>
+                    <td><a href="{% url 'store:increase_tree_qty' item_id=tree.id  %}">Increase</a></td>
+                    <td><a href="{% url 'store:decrease_tree_qty' item_id=tree.id %}">Decrease</a></td>
+                      <td><a href="{% url 'store:remove_tree' item_id=tree.id %}">Remove</a></td>
+                  </tr>
+                {% endfor %}
+                {% for product in products %}
+                    <tr>
+                    <th scope="row">{{ product.product.name }}</th>
+                    <td>{{ product.qty }}</td>
+                    <td><a href="{% url 'store:increase_product_qty' item_id=product.id  %}">Increase</a></td>
+                    <td><a href="{% url 'store:decrease_product_qty' item_id=product.id %}">Decrease</a></td>
+                      <td><a href="{% url 'store:remove_product' item_id=product.id %}">Remove</a></td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+        <p>You don't have anything in your cart. Trying adding some stuff.</p>
+    {% endif %}
+
+        <a class="btn btn-lg btn-primary" href="" role="button">Continue to checkout &raquo;</a>
+
+    </div>
+
+{% endblock %}
