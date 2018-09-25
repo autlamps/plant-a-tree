@@ -1,0 +1,44 @@
+{% extends 'base_store.html' %}
+
+{%  block customcss %}
+<style>
+    body {
+        min-height: 75rem;
+    }
+</style>
+
+{%  endblock %}
+
+{%  block content %}
+
+    <main role="main" class="container">
+            <h2>{{ name }}</h2>
+
+
+    <div class="row">
+          <div class="col-lg-4">
+            <img class="rounded-circle" src={{ y1 }} alt="YearOne" width="280" height="280">
+            <h2>Heading</h2>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <img class="rounded-circle" src="{{ y2 }}" alt="YearTwo" width="280" height="280">
+            <h2>Heading</h2>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <img class="rounded-circle" src="{{ y3 }}" alt="YearThree" width="280" height="280">
+            <h2>Heading</h2>
+          </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="rounded-circle" src="{{ y5 }}" alt="YearFive" width="280" height="280">
+            <h2>Heading</h2>
+          </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="rounded-circle" src="{{ y10 }}" alt="YearTen" width="280" height="280">
+            <h2>Heading</h2>
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+
+
+    </main>
+
+{% endblock %}

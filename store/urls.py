@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.urls import re_path, path
 
-from store.views import index, login, cart
+from store.views import index, login, cart, tree
 from store.views.cart import TYPE_TREE, TYPE_PRODUCT
 
 urlpatterns = [
@@ -24,4 +24,6 @@ urlpatterns = [
          name='decrease_product_qty'),
     path('cartproductdelete/<int:item_id>/', cart.remove_product,
          name='remove_product'),
+    path('tree/<int:item_id>/', tree.get_tree,
+         name="get_tree"),
 ]
