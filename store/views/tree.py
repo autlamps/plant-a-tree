@@ -20,4 +20,5 @@ def get_tree(request, item_id):
         'y3': item.year_three,
         'y5': item.year_five,
         'y10': item.year_ten,
+        'tree': item,
     })
