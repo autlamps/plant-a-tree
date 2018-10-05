@@ -94,7 +94,12 @@ def increase_tree_qty(request, item_id):
 def decrease_tree_qty(request, item_id):
     item = get_object_or_404(CartTreeItem, pk=item_id)
     item.qty += -1
-    item.save()
+
+    if item.qty < 1:
+        item.delete()
+    else:
+        item.save()
+
     return redirect('store:cart')
 
 
@@ -120,7 +125,12 @@ def increase_product_qty(request, item_id):
 def decrease_product_qty(request, item_id):
     item = get_object_or_404(CartProductItem, pk=item_id)
     item.qty += -1
-    item.save()
+
+    if item.qty < 1:
+        item.delete()
+    else:
+        item.save()
+
     return redirect('store:cart')
 
 
