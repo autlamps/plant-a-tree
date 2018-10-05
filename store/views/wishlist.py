@@ -4,7 +4,8 @@ from django.http import HttpResponseServerError, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_http_methods
 
-from store.models import Wishlist, WishlistTreeItem, Tree, Product, WishlistProductItem
+from store.models import Wishlist, WishlistTreeItem, Tree, Product, \
+    WishlistProductItem
 
 TYPE_TREE = 'tree'
 TYPE_PRODUCT = 'product'
@@ -31,7 +32,8 @@ def add(request, type_of, item_id):
         item = get_object_or_404(Tree, pk=item_id)
 
         # try and see if the item is already in the wishlist
-        wishlist_item = WishlistTreeItem.objects.filter(tree=item, wishlist=wishlist).first()
+        wishlist_item = WishlistTreeItem.objects.\
+            filter(tree=item, wishlist=wishlist).first()
 
         # otherwise create a new one
         if wishlist_item is None:
@@ -51,8 +53,8 @@ def add(request, type_of, item_id):
     elif type_of == TYPE_PRODUCT:
         item = get_object_or_404(Product, pk=item_id)
 
-        wishlist_item = WishlistProductItem.objects.filter(product=item,
-                                                   wishlist=wishlist).first()
+        wishlist_item = WishlistProductItem.objects\
+            .filter(product=item, wishlist=wishlist).first()
 
         if wishlist_item is None:
             wishlist_item = WishlistProductItem(
