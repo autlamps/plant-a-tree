@@ -54,6 +54,9 @@ class Product(models.Model):
                                  related_name='products')
     image = models.CharField(max_length=100000)
 
+    def __str__(self):
+        return self.name
+
 
 # a little bit of copying is better than a little bit of abstraction
 # also... I'm lazy

@@ -1,0 +1,62 @@
+{% extends 'base_store.html' %}
+
+{%  block customcss %}
+<style>
+.carousel {
+  margin-bottom: 4rem;
+}
+
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+.carousel-item {
+  height: 32rem;
+  background-color: #777;
+}
+
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
+    max-width: none;
+    object-fit:contain;
+}
+</style>
+
+{%  endblock %}
+
+{%  block content %}
+
+    <main role="main">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="first-slide" src="{{ product.image }}" alt="First slide">
+            <div class="container">
+            </div>
+          </div>
+      </div>
+    </div>
+    </main>
+
+    <div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            <p>Category: {{ product.category }}</p>
+            <p>Price: ${{ product.price }}</p>
+        </div>
+        <div class="col">
+            <a class="btn btn-lg btn-success" href="{% url 'store:addproducttocart' item_id=product.id qty=1 %}" role="button">Add to cart &raquo;</a>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
