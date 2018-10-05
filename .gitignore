@@ -163,3 +163,5 @@ local_settings.py
 
 .env
 db.sqlite3
+
+plantatree/__pycache__/settings.cpython-35.pyc
