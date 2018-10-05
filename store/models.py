@@ -73,7 +73,6 @@ class WishlistTreeItem(models.Model):
     wishlist = models.ForeignKey('Wishlist', on_delete=models.CASCADE,
                                  related_name='trees')
     tree = models.ForeignKey('Tree', on_delete=models.CASCADE)
-    qty = models.IntegerField()
 
     def __str__(self):
         return self.wishlist.user.username + " " + self.tree.name
