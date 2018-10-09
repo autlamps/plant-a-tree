@@ -55,6 +55,7 @@
         </div>
         <div class="col">
             <a class="btn btn-lg btn-success" href="{% url 'store:addproducttocart' item_id=product.id qty=1 %}" role="button">Add to cart &raquo;</a>
+            <a class="btn btn-lg btn-primary" href="{% url 'store:addproducttowishlist' item_id=product.id %}" role="button">Add to wishlist &raquo;</a>
         </div>
     </div>
     </div>

@@ -106,6 +106,7 @@
         </div>
         <div class="col">
             <a class="btn btn-lg btn-success" href="{% url 'store:addtreetocart' item_id=tree.id qty=1 %}" role="button">Add to cart &raquo;</a>
+                        <a class="btn btn-lg btn-primary" href="{% url 'store:addtreetowishlist' item_id=tree.id %}" role="button">Add to wishlist &raquo;</a>
         </div>
     </div>
     </div>

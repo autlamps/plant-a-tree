@@ -1,0 +1,52 @@
+{% extends 'base_store.html' %}
+
+{% block customcss %}
+<style>
+/* Show it's not fixed to the top */
+body {
+  min-height: 75rem;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+    <div class="row">
+        <h2>Wishlist</h2>
+    </div>
+
+    {% if trees or products %}
+         <table class="table table-striped">
+                <thead>
+                  <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Add to Cart</th>
+                      <th scope="col">Remove</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for tree in trees %}
+                  <tr>
+                    <th scope="row">{{ tree.tree.name }}</th>
+                    <td><a href="{% url 'store:addtreetocart' item_id=tree.tree.id qty=1 %}">Add to Cart</a></td>
+                      <td><a href="{% url 'store:removetreefromwishlist' item_id=tree.tree.id %}">Remove</a></td>
+                  </tr>
+                {% endfor %}
+                {% for product in products %}
+                    <tr>
+                    <th scope="row">{{ product.product.name }}</th>
+                    <td><a href="{% url 'store:addproducttocart' item_id=product.product.id  qty=1 %}">Add to cart</a></td>
+                      <td><a href="{% url 'store:removeproductfromwishlist' item_id=product.product.id %}">Remove</a></td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+        <p>You don't have anything in your wishlist. Trying adding some stuff.</p>
+    {% endif %}
+    </div>
+
+{% endblock %}
