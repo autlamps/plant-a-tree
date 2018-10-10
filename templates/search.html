@@ -1,10 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base_store.html' %}
+
+{% block customcss %}
+<style>
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40%;
+    object-fit: contain;
+
+}
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.card > img {
+    max-height: 20rem;
+    max-width: none;
+    object-fit: contain;
+}
+card + card {
+    margin: 2rem;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+    <div class="row">
+        <h2>Search</h2>
+    </div>
+
+    <main>
+    {% if trees or products %}
+        {% for tree in trees %}
+            <div class="card">
+                <img src="{{ tree.year_one }}">
+                <div class="container" style="width:100%; height: 4rem;">
+                    <h4><b><a href="/tree/{{ tree.id }}">{{ tree.name }}</a></b></h4>
+                    <p>{{ tree.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        {% for product in products %}
+            <div class="card">
+                <img src="{{ product.image }} ">
+                <div class="container" style="width: 100%; height: 4rem;">
+                    <h4><b>{{ product.name }}</b></h4>
+                    <p>{{ product.description }}</p>
+                </div>
+            </div>
+            </main>
+
+        {% endfor %}
+    {% else %}
+        <p>No results can be found</p>
+    {% endif %}
+
+    </div>
+
+{% endblock %}
