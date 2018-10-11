@@ -1,5 +1,8 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def index_view(request):
-    return HttpResponse("index view")
+    return render(request, 'index.html')
+
+
