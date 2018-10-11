@@ -16,7 +16,8 @@ def get_item(request):
             trees.update(Tree.objects.filter(description__icontains=query))
 
             products.update(Product.objects.filter(name__icontains=query))
-            products.update(Product.objects.filter(description__icontains=query))
+            products.update(Product.objects.filter(
+                description__icontains=query))
 
     return render(request, 'search.html', context={
         'trees': trees,
