@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.urls import re_path, path
 
-from store.views import index, login, cart, tree, product, wishlist, search
+from store.views import index, login, cart, tree, product, wishlist, search, all
 from store.views.cart import TYPE_TREE, TYPE_PRODUCT
 
 urlpatterns = [
@@ -37,5 +37,11 @@ urlpatterns = [
          name='removeproductfromwishlist'),
     path('wishlisttreeremove/<int:item_id>/', wishlist.remove_tree,
          name='removetreefromwishlist'),
-    path('search/', search.get_item, name='search')
+    path('search/', search.get_item, name='search'),
+    path('all/', all.show_all,
+         name='showall'),
+    path('all/trees/', all.show_trees,
+         name='showalltrees'),
+    path('all/products/', all.show_products,
+         name='showallproducts'),
 ]
