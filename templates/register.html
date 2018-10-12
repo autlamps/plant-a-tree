@@ -6,6 +6,16 @@
 {% block content %}
     <div class="container">
 
+      <div class="row>">
+  {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-primary" role="alert">
+            {{ message }}
+          </div>
+      {% endfor %}
+  {% endif %}
+  </div>
+
     <div class="row">
         {{ form.non_field_errors }}
             <form class="form-signin" method="post", action="{% url 'store:register' %}">
@@ -19,8 +29,9 @@
                 <input type="password" id="{{ form.password.id_for_label }}" class="form-control" placeholder="Password" name="{{ form.password.name }}" required>
                 {{ form.passwordV.errors }}
                 <label for="{{ form.passwordV.id_for_label }}" class="sr-only">Verify Password</label>
-                <input type="password" id="{{ form.passwordV.id_for_label }}" class="form-control" placeholder="Password" name="{{ form.passwordV.name }}" required>
+                <input type="password" id="{{ form.passwordV.id_for_label }}" class="form-control" placeholder="Retype password" name="{{ form.passwordV.name }}" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                <p>Already have an account? <a href="{% url 'store:login' %}">login here...</a>
                 <p class="mt-5 mb-3 text-muted">Plant a Tree &copy; 2017-2018</p>
             </form>
     </div>

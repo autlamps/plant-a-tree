@@ -1,6 +1,7 @@
-from django.contrib.auth import authenticate
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_http_methods
 
 from store.forms import RegisterForm
 
@@ -9,15 +10,28 @@ def register_view(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
 
-        if form.is_vaild():
-            form.save()
+        if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             passwordV = form.cleaned_data['passwordV']
-            if password is passwordV:
-                user = authenticate(username=username, password=password)
 
-                return redirect('home')
+            is_user = User.objects.filter(username=username).exists()
+            if is_user:
+                messages.error(request, 'User already exists!')
+                return redirect('store:register')
+
+            else:
+                if password == passwordV:
+                    user = User.objects.create_user(username=username,
+                                                    password=password)
+                    user.save()
+                    login(request=request, user=user)
+
+                    return redirect('store:index')
+
+                else:
+                    messages.error(request, 'Passwords do not match!')
+                    return redirect('store:register')
 
         else:
             form = RegisterForm()

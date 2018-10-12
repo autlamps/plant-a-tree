@@ -37,7 +37,7 @@ urlpatterns = [
          name='removeproductfromwishlist'),
     path('wishlisttreeremove/<int:item_id>/', wishlist.remove_tree,
          name='removetreefromwishlist'),
-    path('register/', register.register_view, name='register')
+    path('register/', register.register_view, name='register'),
     path('search/', search.get_item, name='search'),
     path('all/', all.show_all,
          name='showall'),
