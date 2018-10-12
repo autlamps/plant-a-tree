@@ -133,3 +133,6 @@ STATICFILES_DIRS = (
     # static file location relative to settings.py
     os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'static')),
 )
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
