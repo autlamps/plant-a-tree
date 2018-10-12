@@ -1,0 +1,27 @@
+{% extends 'base_store.html' %}
+{% block customcss %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+  {{ form.non_field_errors }}
+    <form class="form-register" style="margin-right: 40%" method="post",action="{% url 'store:register' %}">
+        {% csrf_token %}
+      <h1 class="h3 mb-3 font-weight-normal">Please register in</h1>
+        {{ form.username.errors }}
+        <label for="{{ form.username.id_for_label }}" class="sr-only">Email address</label>
+        <input type="text" id="{{ form.username.id_for_label }}" class="form-control" placeholder="Username" name="{{ form.username.name }}" required autofocus>
+        {{ form.password.errors }}
+        <label for="{{ form.password.id_for_label }}" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="{{ form.password.name }}" required>
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <p class="mt-5 mb-3 text-muted">Plant a Tree &copy; 2017-2018</p>
+    </form>
+  </div>
+{% endblock %}
