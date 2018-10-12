@@ -17,7 +17,13 @@ def login_view(request):
 
             if user is not None:
                 login(request=request, user=user)
-                return redirect('store:index')
+
+                try:
+                    next = request.GET["next"]
+                except KeyError:
+                    return redirect('store:index')
+
+                return redirect(next)
 
             else:
                 messages.error(request, 'Incorrect Username or Password!')
