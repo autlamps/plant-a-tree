@@ -9,9 +9,4 @@ install:
 script:
 - pycodestyle --exclude='*migrations/*' store/
 - python3 manage.py test
-deploy:
-  provider: heroku
-  api_key:
-    secure: KHSwA788fcrNkA+lSITWRQgSomaTWzW/67YiC0YS/GOFetBu+iEsrKy11a9a/ZchMS5Tw+JU59QpLGvb6MWU7DZk0VhnDHuyy2GAJyjHWdkpvaur9tqLYg5ebfa/uYMtog7Fnlf+NX3/4j8egt2+axUSiXxCrbXWtdNb/2A028jUZPyy/SYl4m2m6YbvMSWBcvAjIpv6gsc/Zo3zNJhiDVdoFd7k7af6gjH/SV+iERUhB7c9WfK64ko83J3XEr2do1b7esLgqgQycyKmtu0HeqsSqw9kab19kKWIyXZK1mGMA2iInemzM1GfDxPNNlbL0CF3jBzVIyFlWJVXOhO4NVdXzHK0qPM7BEg99+3YJSWr2Qvys7RAMZ+IfDv3xYmOCFpySNVmwjJmEHtVM8X3+MsxA+TOJvdysSmrZnDnbjyiTWjR4dG/oS1fTv0oAG1CbjTP4XlEicCMNoF9KgJOqS5p/oOOlLIAA44TUFc/wMcJHZ+Ftjrr+Br0GtYr1QoyNbTReXXva9TTG10OqCYRxDQmhplC9kYC8ZrT6GPCUzyTWl9nNrl3QL3qsBJONaIBiBDscAAXTwvzH9hDjWqiM42Aomah0PGUi50XRMptChfUGCnMombxpU00SU5kqWlX3Rnf78l/rI/8ArJrbeU7oOYFkkG0WVNCn/07S02vU+k=
-  app: lamps-plant-a-tree
-  on: dev
+# deploy now handled with github integration
