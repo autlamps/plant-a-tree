@@ -27,6 +27,13 @@ card + card {
 {% block content %}
 <div class="container">
     {% if trees or products %}
+        {% if trees and products %}
+            <h1>All trees and products</h1>
+            {% elif trees and products is None %}
+            <h1>All trees</h1>
+            {% elif products and trees is None %}
+            <h1>All products</h1>
+            {% endif %}
         <div class="card-columns">
         {% for tree in trees %}
             <div class="card">
