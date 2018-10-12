@@ -51,7 +51,7 @@ body {
                 </tbody>
             </table>
 
-                <a class="btn btn-lg btn-primary" href="" role="button">Continue to checkout &raquo;</a>
+                <a class="btn btn-lg btn-primary" href="{% url 'store:checkout' %}" role="button">Continue to checkout &raquo;</a>
 
     {% else %}
         <p>You don't have anything in your cart. Trying adding some stuff.</p>

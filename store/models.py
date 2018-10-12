@@ -91,6 +91,30 @@ class Cart(models.Model):
     user = models.ForeignKey(django.contrib.auth.get_user_model(),
                              related_name='cart', on_delete=models.CASCADE)
 
+    @property
+    def total_cost(self):
+        total = 0
+
+        for tree in self.trees.all():
+            total += tree.total_cost
+
+        for product in self.products.all():
+            total += product.total_cost
+
+        return total
+
+    @property
+    def item_count(self):
+        total = 0
+
+        for tree in self.trees.all():
+            total += tree.qty
+
+        for product in self.products.all():
+            total += product.qty
+
+        return total
+
     def __str__(self):
         return self.user.username
 
@@ -100,6 +124,10 @@ class CartTreeItem(models.Model):
                              related_name='trees')
     tree = models.ForeignKey('Tree', on_delete=models.CASCADE)
     qty = models.IntegerField()
+
+    @property
+    def total_cost(self):
+        return self.tree.price * self.qty
 
     def __str__(self):
         return self.cart.user.username + " " + self.tree.name
@@ -113,3 +141,7 @@ class CartProductItem(models.Model):
 
     def __str__(self):
         return self.cart.user.username + " " + self.product.name
+
+    @property
+    def total_cost(self):
+        return self.product.price * self.qty

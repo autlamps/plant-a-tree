@@ -17,6 +17,7 @@ import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -27,7 +28,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 SECRET_KEY = '%h$1u*fpx5-d@!%-=f7yor=u(nmu3muevx1(3gg3v7#d&ey+!l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.environ.get("DEBUG") == 'True' else False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', os.environ.get('HOSTNAME', '')]
 

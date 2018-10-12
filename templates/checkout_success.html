@@ -1,0 +1,11 @@
+{% extends 'base_store.html' %}
+
+{%  block content %}
+    <main role="main">
+    <div class="container">
+        <h1>Payment Successful</h1>
+        <h2>Items will be dispatched soon. Check your email for confirmation.</h2>
+        <a href="{% url 'store:index' %}">Return to front page...</a>
+    </div>
+    </main>
+{%  endblock %}

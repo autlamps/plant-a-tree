@@ -1,8 +1,7 @@
-from django.conf.urls import url
-from django.urls import re_path, path
+from django.urls import path
 
-from store.views import index, login, cart, tree, product, wishlist, \
-    search, all
+from store.views import index, login, cart, tree, product, wishlist, checkout,\
+    search
 from store.views.cart import TYPE_TREE, TYPE_PRODUCT
 
 urlpatterns = [
@@ -45,4 +44,6 @@ urlpatterns = [
          name='showalltrees'),
     path('all/products/', all.show_products,
          name='showallproducts'),
+    path('checkout/', checkout.checkout, name='checkout'),
+    path('checkout/process/', checkout.process_checkout, name='process'),
 ]
