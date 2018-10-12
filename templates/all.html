@@ -28,17 +28,17 @@ card + card {
 <div class="container">
     {% if trees or products %}
         {% if trees and products %}
-            <h1>All trees and products</h1>
+            <h1>All Trees and Products</h1>
             {% elif trees and products is None %}
-            <h1>All trees</h1>
+            <h1>All Trees</h1>
             {% elif products and trees is None %}
-            <h1>All products</h1>
+            <h1>All Products</h1>
             {% endif %}
         <div class="card-columns">
         {% for tree in trees %}
             <div class="card">
                 <img src="{{ tree.year_one }}">
-                <div class="container" style="width: 100%; height: 4rem; text-align: center">
+                <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
                     <h4><b><a href="/tree/{{ tree.id }}">{{ tree.name }}</a> </b></h4>
                     <p>{{ tree.description }}</p>
                 </div>
@@ -47,7 +47,7 @@ card + card {
         {% for product in products %}
             <div class="card">
                 <img src="{{ product.image }}">
-                <div class="container" style="width: 100%; height: 4rem; text-align: center">
+                <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
                     <h4><b><a href="/product/{{ product.id }}">{{ product.name }}</a> </b></h4>
                     <p>{{ product.description }}</p>
                 </div>
