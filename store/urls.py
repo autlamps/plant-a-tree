@@ -1,7 +1,7 @@
 from django.urls import path
 
-from store.views import index, login, cart, tree, product, wishlist, checkout,\
-    search
+from store.views import index, login, cart, tree, product, wishlist, \
+    checkout, search, all
 from store.views.cart import TYPE_TREE, TYPE_PRODUCT
 
 urlpatterns = [

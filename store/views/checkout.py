@@ -38,7 +38,8 @@ def process_checkout(request):
     cart_ob = Cart.objects.get(user=request.user)
 
     message = "Dear {}\n\n".format(request.POST["first_name"])
-    message += "Thank you for your order. It will be dispatched at the first " \
+    message += "Thank you for your order. It will be dispatched at the " \
+               "first " \
                "possible instant. Please find your order details below.\n\n"
 
     message += "QTY - PRODUCT NAME - COST\n"
