@@ -28,11 +28,11 @@ card + card {
 <div class="container">
     {% if trees or products %}
         {% if trees and products %}
-            <h1>All trees and products</h1>
+            <h1>All Trees and Products</h1>
             {% elif trees and products is None %}
-            <h1>All trees</h1>
+            <h1>All Trees</h1>
             {% elif products and trees is None %}
-            <h1>All products</h1>
+            <h1>All Products</h1>
             {% endif %}
         <div class="card-columns">
         {% for tree in trees %}
