@@ -1,100 +1,128 @@
 {% extends 'base_store.html' %}
+<style>
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40%;
+    object-fit: contain;
+}
+.card-hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.card > img {
+    height: 100%;
+    width: 100%;
+    max-height: 20rem;
+    max-width: none;
+    object-fit: contain;
+}
+card + card {
+    margin: 2rem;
+}
+</style>
 
     {%  block customcss %}
-    <!-- Bootstrap core CSS -->
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/static/css/product.css" rel="stylesheet">
-
 
   {%  endblock %}
 
   {%  block content %}
 
-    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-      <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal">Plant A Tree</h1>
-        <a class="btn btn-outline-secondary" href="#">Our Tree Collection</a>
+      <main role="main">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators"></ol>
+          <div class="carousel-inner">
+              <div class="carousel-item active" style="height: 32rem; object-fit: contain; position: center">
+                  <img class="d-block w-100" src="https://photos.smugmug.com/Black-White/i-P3SjTS2/0/a0031d98/X3/XT2F1817-bw-X3.jpg" alt="First Slide">
+                  <div class="container">
+                      <div class="carousel-caption">
+                    <h1 class="display-4 font-weight-normal">Plant A Tree</h1>
+                    <a class="btn btn-outline-secondary" href="#">Our Tree Collection</a>
+                      </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </main>
+
+    <div class="row mb-5">
+    <div class="container">
+        <h2 style="text-align: center">Featured Tree: {{ tree.name }}</h2>
+      <div class="card-deck">
+        <a href="/tree/{{ tree.id }}" class="card">
+            <img src="{{ tree.year_one }}">
+            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
+                <h4>Year One</h4>
+            </div>
+        </a>
+
+        <a href="/tree/{{ tree.id }}" class="card">
+            <img src="{{ tree.year_two }}">
+            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
+                <h4>Year Two</h4>
+            </div>
+        </a>
+
+        <a href="/tree/{{ tree.id }}" class="card">
+            <img src="{{ tree.year_three }}">
+            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
+                <h4>Year Five</h4>
+            </div>
+        </a>
+
+        <a href="/tree/{{ tree.id }}" class="card">
+            <img src="{{ tree.year_five }}">
+            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
+                <h4>Year Ten</h4>
+            </div>
+        </a>
       </div>
-      <div ></div>
     </div>
-
-    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-      <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-        <div class="my-3 py-3">
-          <h2 class="display-5">Year 5</h2>
-            <p class="lead">There is a example of a tree at age 5</p>
-
-        </div>
-        <div>
-             <img src="{{ tree.year_five }}" alt="Tree year 5">
-        </div>
-      </div>
-      <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <div class="my-3 p-3">
-          <h2 class="display-5">Year 2</h2>
-          <p class="lead">Here is an example of a tree at age 2</p>
-        </div>
-      <img src="{{ tree.year_two }}" alt="tree year 2">
-      </div>
     </div>
-
-    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-      <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <div class="my-3 p-3">
-          <h2 class="display-5">Trees</h2>
-          <p class="lead">More Interesting Trees</p>
+      <div class="row mb-3">
+        <div class="col-sm-1">
         </div>
-         <img src="{{ tree.year_one }}" alt="year 1 tree">
-      </div>
-      <div class="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-        <div class="my-3 py-3">
-          <h2 class="display-5">Trees</h2>
-          <p class="lead">Another Interesting Tree</p>
+        <div class="col-sm-4" style="text-align: center">
+            <h3>Fun Facts</h3>
+            <ul class="list-group list-group-flush">
+                {% for fact in facts %}
+                <a href="/tree/{{ fact.id }}" class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h4 class="mb-1">{{ fact.name }}</h4>
+                    </div>
+                    <p class="mb-1">{{ fact.fun_facts }}</p>
+                </a>
+                {% endfor %}
+            </ul>
         </div>
-        <img src="{{ tree.year_ten }}" alt="year 10 tree">
-      </div>
-    </div>
-
-    <footer class="container py-5">
-      <div class="row">
-        <div class="col-6 col-md">
-          <h5>Home</h5>
+        <div class="col-sm-2">
         </div>
-        <div class="col-6 col-md">
-          <h5>Tree Guide</h5>
+        <div class="col-sm-4" style="text-align: center">
+        {# Get buttons centered verically  #}
+            {% if user.is_authenticated %}
+                    <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:wishlist' %}" role="button">Wishlist</a>
+                    <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:cart' %}" role="button">Cart</a>
+            {% else %}
+                    <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:login' %}" role="button">Login</a>
+        {# Needs to be changed to register #}
+                    <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:login' %}" role="button">Register</a>
+            {% endif %}
         </div>
-        <div class="col-6 col-md">
-          <h5>Products</h5>
-        </div>
-        <div class="col-6 col-md">
-          <h5>About</h5>
-        </div>
-          <div class="col-6 col-md">
-          <h5>Contact</h5>
+        <div class="col-sm-1">
         </div>
       </div>
-    </footer>
-
+      <div class="container">
+        <h2>Our Range</h2>
+        <div class="card-columns">
+        {% for t in trees %}
+            <a href="/tree/{{ t.id }}" class="card">
+                <img src="{{ t.year_one }}">
+                <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
+                    <h4><b>{{ t.name }}</b></h4>
+                    <p>{{ t.description }}</p>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+      </div>
 
   {%  endblock %}
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="/static/js/jquery-slim.min.js"><\/script>')</script>
-    <script src="/static/js/popper.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/holder.min.js"></script>
-    <script>
-      Holder.addTheme('thumb', {
-        bg: '#55595c',
-        fg: '#eceeef',
-        text: 'Thumbnail'
-      });
-    </script>
-  </body>
-</html>
