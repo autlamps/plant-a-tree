@@ -1,0 +1,128 @@
+{% extends 'base_store.html' %}
+<style>
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40%;
+    object-fit: contain;
+}
+.card-hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.card > img {
+    height: 100%;
+    width: 100%;
+    max-height: 20rem;
+    max-width: none;
+    object-fit: contain;
+}
+card + card {
+    margin: 2rem;
+}
+</style>
+
+    {%  block customcss %}
+
+  {%  endblock %}
+
+  {%  block content %}
+
+      <main role="main">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators"></ol>
+          <div class="carousel-inner">
+              <div class="carousel-item active" style="height: 32rem; object-fit: contain; position: center">
+                  <img class="d-block w-100" src="https://photos.smugmug.com/Black-White/i-P3SjTS2/0/a0031d98/X3/XT2F1817-bw-X3.jpg" alt="First Slide">
+                  <div class="container">
+                      <div class="carousel-caption">
+                    <h1 class="display-4 font-weight-normal">Plant A Tree</h1>
+                    <a class="btn btn-outline-secondary" href="#">Our Tree Collection</a>
+                      </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </main>
+
+    <div class="row mb-5">
+    <div class="container">
+        <h2 style="text-align: center">Featured Tree: {{ tree.name }}</h2>
+      <div class="card-deck">
+        <a href="/tree/{{ tree.id }}" class="card">
+            <img src="{{ tree.year_one }}">
+            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
+                <h4>Year One</h4>
+            </div>
+        </a>
+
+        <a href="/tree/{{ tree.id }}" class="card">
+            <img src="{{ tree.year_two }}">
+            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
+                <h4>Year Two</h4>
+            </div>
+        </a>
+
+        <a href="/tree/{{ tree.id }}" class="card">
+            <img src="{{ tree.year_three }}">
+            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
+                <h4>Year Five</h4>
+            </div>
+        </a>
+
+        <a href="/tree/{{ tree.id }}" class="card">
+            <img src="{{ tree.year_five }}">
+            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
+                <h4>Year Ten</h4>
+            </div>
+        </a>
+      </div>
+    </div>
+    </div>
+      <div class="row mb-3">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-4" style="text-align: center">
+            <h3>Fun Facts</h3>
+            <ul class="list-group list-group-flush">
+                {% for fact in facts %}
+                <a href="/tree/{{ fact.id }}" class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h4 class="mb-1">{{ fact.name }}</h4>
+                    </div>
+                    <p class="mb-1">{{ fact.fun_facts }}</p>
+                </a>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-4" style="text-align: center">
+        {# Get buttons centered verically  #}
+            {% if user.is_authenticated %}
+                    <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:wishlist' %}" role="button">Wishlist</a>
+                    <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:cart' %}" role="button">Cart</a>
+            {% else %}
+                    <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:login' %}" role="button">Login</a>
+        {# Needs to be changed to register #}
+                    <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:login' %}" role="button">Register</a>
+            {% endif %}
+        </div>
+        <div class="col-sm-1">
+        </div>
+      </div>
+      <div class="container">
+        <h2>Our Range</h2>
+        <div class="card-columns">
+        {% for t in trees %}
+            <a href="/tree/{{ t.id }}" class="card">
+                <img src="{{ t.year_one }}">
+                <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
+                    <h4><b>{{ t.name }}</b></h4>
+                    <p>{{ t.description }}</p>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+      </div>
+
+  {%  endblock %}
