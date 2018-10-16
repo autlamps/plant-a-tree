@@ -1,4 +1,6 @@
 {% extends 'base_store.html' %}
+
+    {%  block customcss %}
 <style>
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -12,17 +14,15 @@
 .card > img {
     height: 100%;
     width: 100%;
-    max-height: 20rem;
+    max-height: 14rem;
     max-width: none;
     object-fit: contain;
 }
+
 card + card {
     margin: 2rem;
 }
 </style>
-
-    {%  block customcss %}
-
   {%  endblock %}
 
   {%  block content %}
@@ -36,7 +36,7 @@ card + card {
                   <div class="container">
                       <div class="carousel-caption">
                     <h1 class="display-4 font-weight-normal">Plant A Tree</h1>
-                    <a class="btn btn-outline-secondary" href="#">Our Tree Collection</a>
+                    <a class="btn btn-outline-secondary" href="/all/trees">Our Tree Collection</a>
                       </div>
                   </div>
                 </div>
@@ -48,33 +48,33 @@ card + card {
     <div class="container">
         <h2 style="text-align: center">Featured Tree: {{ tree.name }}</h2>
       <div class="card-deck">
-        <a href="/tree/{{ tree.id }}" class="card">
-            <img src="{{ tree.year_one }}">
-            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
-                <h4>Year One</h4>
+        <div class="card">
+                <img src="{{ tree.year_one }}">
+                <div class="container" style="width: 100%; min-height: 6rem; text-align: center">
+                    <h4><b><a href="/tree/{{ tree.id }}">{{ tree.name }}</a> </b></h4>
+                </div>
             </div>
-        </a>
 
-        <a href="/tree/{{ tree.id }}" class="card">
-            <img src="{{ tree.year_two }}">
-            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
-                <h4>Year Two</h4>
+        <div class="card">
+                <img src="{{ tree.year_two }}">
+                <div class="container" style="width: 100%; min-height: 6rem; text-align: center">
+                    <h4><b><a href="/tree/{{ tree.id }}">{{ tree.name }}</a> </b></h4>
+                </div>
             </div>
-        </a>
 
-        <a href="/tree/{{ tree.id }}" class="card">
-            <img src="{{ tree.year_three }}">
-            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
-                <h4>Year Five</h4>
+        <div class="card">
+                <img src="{{ tree.year_five }}">
+                <div class="container" style="width: 100%; min-height: 6rem; text-align: center">
+                    <h4><b><a href="/tree/{{ tree.id }}">{{ tree.name }}</a> </b></h4>
+                </div>
             </div>
-        </a>
 
-        <a href="/tree/{{ tree.id }}" class="card">
-            <img src="{{ tree.year_five }}">
-            <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
-                <h4>Year Ten</h4>
+        <div class="card">
+                <img src="{{ tree.year_ten }}">
+                <div class="container" style="width: 100%; min-height: 6rem; text-align: center">
+                    <h4><b><a href="/tree/{{ tree.id }}">{{ tree.name }}</a> </b></h4>
+                </div>
             </div>
-        </a>
       </div>
     </div>
     </div>
@@ -97,15 +97,15 @@ card + card {
         <div class="col-sm-2">
         </div>
         <div class="col-sm-4" style="text-align: center">
-        {# Get buttons centered verically  #}
+            <div class="container">
             {% if user.is_authenticated %}
                     <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:wishlist' %}" role="button">Wishlist</a>
                     <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:cart' %}" role="button">Cart</a>
             {% else %}
                     <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:login' %}" role="button">Login</a>
-        {# Needs to be changed to register #}
-                    <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:login' %}" role="button">Register</a>
+                    <a class="btn btn-secondary btn-lg btn-block" href="{% url 'store:register' %}" role="button">Register</a>
             {% endif %}
+            </div>
         </div>
         <div class="col-sm-1">
         </div>
@@ -114,13 +114,13 @@ card + card {
         <h2>Our Range</h2>
         <div class="card-columns">
         {% for t in trees %}
-            <a href="/tree/{{ t.id }}" class="card">
+            <div class="card">
                 <img src="{{ t.year_one }}">
                 <div class="container" style="width: 100%; min-height: 4rem; text-align: center">
-                    <h4><b>{{ t.name }}</b></h4>
+                    <h4><b><a href="/tree/{{ t.id }}">{{ t.name }}</a> </b></h4>
                     <p>{{ t.description }}</p>
                 </div>
-            </a>
+            </div>
         {% endfor %}
         </div>
       </div>

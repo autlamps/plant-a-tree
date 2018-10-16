@@ -9,4 +9,5 @@ def get_product(request, item_id):
     item = get_object_or_404(Product, pk=item_id)
     return render(request, 'product.html', context={
         'product': item,
+        'page_title': item.name,
     })
